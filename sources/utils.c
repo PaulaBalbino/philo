@@ -6,11 +6,34 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:26:38 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 10:36:15 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:44:58 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+int	current_time_in_ms()
+{
+	struct timeval	currenttime;
+	int				milisec;
+
+	gettimeofday(&currenttime, NULL);
+	milisec = currenttime.tv_sec * 1000;
+	milisec = (currenttime.tv_usec / 1000) + milisec;
+	return (milisec);
+}
+
+/*
+man gettimeofday
+
+timeval definition:
+_STRUCT_TIMEVAL
+{
+	__darwin_time_t         tv_sec;          seconds since Jan. 1, 1970
+	__darwin_suseconds_t    tv_usec;         and microseconds
+};
+
+*/
 
 int	ft_atoi(char *str)
 {

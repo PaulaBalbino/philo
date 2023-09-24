@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 10:52:20 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/24 16:50:13 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int main(int ac, char **av)
 		//TODO mensagem
 		return (0);
 	}
+	//check_simulation(&table);
+
 
 
 

@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 10:42:51 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:01:17 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ static t_philo *init_philosophers(t_config *table)
 		philo[i].philo_nb = i;
 		philo[i].eat_count = 0;
 		set_forks(&philo[i]);
+		if (pthread_mutex_init(&philo[i].nb_and_time_meal, NULL) != 0)
+			return (false);
 		i++;
 	}
 	return (philo);

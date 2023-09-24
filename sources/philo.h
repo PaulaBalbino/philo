@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 11:21:34 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/24 17:00:42 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,23 @@ typedef struct s_philo
 	int			right_fork;
 	int			last_eat;
 	t_config	*config;
+	pthread_mutex_t	nb_and_time_meal;
 	//meal time lock ?
 }	t_philo;
 
 typedef struct s_config
 {
-	//time_t			time_start;
-	//const eh para travar os numeros que nao devem mudar, sao constantes;
-	int philo_count;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	eat_times;
+	int 			philo_count;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				eat_times;
+	int				time_start;
 	pthread_mutex_t	*fork_area;
-	t_philo		*philo; //analisar se basta um *
+	t_philo			*philo;
+	//int				end_simulation;
+	//pthread_mutex_t	*end_simulation_mutex;
+
 }	t_config;
 
 /******************************************************************************
@@ -69,5 +72,7 @@ int set_table(t_config *table, int ac, char **av);
 int	ft_atoi(char *str);
 int init_simulation(t_config *table);
 void	*philosopher(void *info);
+int	current_time_in_ms();
+
 
 #endif

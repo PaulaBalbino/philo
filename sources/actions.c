@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 11:24:14 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/24 15:30:01 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*philosopher(void *info)
 	printf("oi %d", philo->philo_nb);
 	}
 	return (NULL);
+	philo->last_eat = philo->config->time_start;
 }
 
 /*
