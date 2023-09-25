@@ -6,34 +6,37 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 17:01:06 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:39:00 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int init_simulation(t_config *table)
+int	init_simulation(t_config *table)
 {
-	unsigned int i;
+	int	i;
 
 	table->time_start = current_time_in_ms();
 	i = 0;
 	while (i < table->philo_count)
 	{
-		if (pthread_create(&table->philo[i].thread, NULL, &philosopher,
-						   &table->philo[i]) != 0)
-			return (false);
+		if (pthread_create(&table->philo[i].thread, NULL,
+				&philosopher, &table->philo[i]) != 0)
+		{
+			printf("Error while initializing the simulation\n");
+			return (FALSE);
+		}
 		i++;
 	}
-	return (true);
+	return (TRUE);
 }
 
 /* verificar se o nr de refeicoes foi atingido ou se morreu*/
 
-void check_simulation(t_config *table)
+void	check_simulation(t_config *table)
 {
-	unsigned int i;
-	unsigned int meals_eaten;
+	int	i;
+	int	meals_eaten;
 
 	i = 0;
 	meals_eaten = 0;

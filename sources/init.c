@@ -6,18 +6,18 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/24 17:01:17 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:39:31 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_philo *init_philosophers(t_config *table);
+static	t_philo	*init_philosophers(t_config *table);
 
-static	pthread_mutex_t *set_mutex_forks(t_config *table)
+static	pthread_mutex_t	*set_mutex_forks(t_config *table)
 {
 	pthread_mutex_t	*mutex_array;
-	unsigned int 	i;
+	int				i;
 
 	mutex_array = malloc(sizeof(pthread_mutex_t) * table->philo_count);
 	if (mutex_array == 0)
@@ -42,8 +42,7 @@ otherwise an error number will be returned to indicate the error.
 
 ZERO SIGNIFICA QUE DEU CERTO */
 
-
-int set_table(t_config *table, int ac, char **av)
+int	set_table(t_config *table, int ac, char **av)
 {
 	table->philo_count = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
@@ -55,14 +54,20 @@ int set_table(t_config *table, int ac, char **av)
 		table->eat_times = NOT_SET;
 	table->philo = init_philosophers(table);
 	if (table->philo == 0)
-		return (false);
+	{
+		printf("Error while setting the table\n");
+		return (FALSE);
+	}
 	table->fork_area = set_mutex_forks(table);
 	if (set_mutex_forks(table) == 0)
-		return (false);
-	return (true);
+	{
+		printf("Error while setting the table\n");
+		return (FALSE);
+	}
+	return (TRUE);
 }
 
-static void set_forks(t_philo *philo)
+static void	set_forks(t_philo *philo)
 {
 	if (philo->philo_nb % 2 == 0)
 	{
@@ -82,10 +87,10 @@ static void set_forks(t_philo *philo)
 	}
 }
 
-static t_philo *init_philosophers(t_config *table)
+static	t_philo	*init_philosophers(t_config *table)
 {
-	t_philo *philo;
-	int i;
+	t_philo	*philo;
+	int		i;
 
 	philo = malloc(sizeof(t_philo) * table->philo_count);
 	if (philo == 0)
@@ -98,7 +103,7 @@ static t_philo *init_philosophers(t_config *table)
 		philo[i].eat_count = 0;
 		set_forks(&philo[i]);
 		if (pthread_mutex_init(&philo[i].nb_and_time_meal, NULL) != 0)
-			return (false);
+			return (FALSE);
 		i++;
 	}
 	return (philo);
