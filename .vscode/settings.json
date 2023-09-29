@@ -1,0 +1,19 @@
+{
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/paulalucena/Desktop/Philosophers/philo",
+			"binaryPath": "/Users/paulalucena/Desktop/Philosophers/philo",
+			"binaryArgs": [
+				"5", "800", "200", "200"
+			]
+		},
+		{
+			"cwd": "/Users/paulalucena/Desktop/Philosophers/philo",
+			"binaryPath": "/Users/paulalucena/Desktop/Philosophers/philo/philo",
+			"binaryArgs": [
+				"5", "800", "200", "200"
+			]
+		}
+	]
+}
+

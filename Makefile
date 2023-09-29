@@ -6,13 +6,13 @@
 #    By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:07:23 by pbalbino          #+#    #+#              #
-#    Updated: 2023/09/25 14:19:09 by pbalbino         ###   ########.fr        #
+#    Updated: 2023/09/29 11:45:36 by pbalbino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-CFLAGS	=	-Wall -Werror -Wextra -pthread
+CFLAGS	=	-Wall -Werror -Wextra -pthread -g
 
 #RM		=	/bin/rm -f
 
