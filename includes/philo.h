@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 12:00:02 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:39:15 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ typedef struct s_philo
 typedef struct s_config
 {
 	int				philo_count;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
+	time_t				time_to_die;
+	time_t				time_to_eat;
+	time_t				time_to_sleep;
 	int				eat_times;
-	int				time_start;
+	time_t				time_start;
 	int				stop_simulation;
 	pthread_mutex_t	*fork_area;
 	pthread_mutex_t	locked_printf;
@@ -76,7 +76,7 @@ int		set_table(t_config *table, int ac, char **av);
 int		ft_atoi(char *str);
 int		init_simulation(t_config *table);
 void	*philosopher(void *info);
-int		current_time_in_ms(void);
+time_t		current_time_in_ms(void);
 int		numeric_input(int ac, char **av);
 void state_message(t_philo *philo, char *str);
 

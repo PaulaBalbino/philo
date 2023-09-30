@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 11:58:44 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:35:44 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void wait_threads(t_config *table)
 
 int	main(int ac, char **av)
 {
-	t_config	table;
-
+	t_config	*table;
+	table = malloc(sizeof(t_config));
 	if (ac < 5 || ac > 6)
 	{
 		printf("Check number of arguments\n");
@@ -59,15 +59,16 @@ int	main(int ac, char **av)
 	}
 	if (numeric_input(ac, av) == -1)
 		return (0);
-	if (set_table(&table, ac, av) == FALSE)
+	if (set_table(table, ac, av) == FALSE)
 		return (0);
-	if (init_simulation(&table) == FALSE)
+	if (init_simulation(table) == FALSE)
 	{
 		printf("Error while initializing the simulation\n");
 		return (0);
 	}
-	wait_threads(&table);
-	if (table.fork_area != NULL)
-		free(table.fork_area);
-	free(table.philo);
+	wait_threads(table);
+	if (table->fork_area != NULL)
+		free(table->fork_area);
+	free(table->philo);
+	free(table);
 }

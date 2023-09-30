@@ -6,16 +6,16 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:26:38 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 11:59:50 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 13:39:43 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	current_time_in_ms(void)
+time_t	current_time_in_ms(void)
 {
 	struct timeval	currenttime;
-	int				milisec;
+	time_t				milisec;
 
 	gettimeofday(&currenttime, NULL);
 	milisec = currenttime.tv_sec * 1000;
@@ -38,7 +38,7 @@ _STRUCT_TIMEVAL
 void state_message(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->config->locked_printf);
-	printf("%d %d %s\n", current_time_in_ms(), philo->philo_nb, str); //TODO current time: mudar para long
+	printf("%ld %d %s\n", current_time_in_ms(), philo->philo_nb, str); //TODO current time: mudar para long
 	pthread_mutex_unlock(&philo->config->locked_printf);
 }
 

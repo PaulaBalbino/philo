@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 12:37:03 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 16:19:20 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	*ft_check(void *input)
 	pthread_mutex_unlock(&table->stop_simulation_mutex);
 	while (TRUE)
 	{
-	//	if (check_simulation_time(table) == TRUE
-	//		|| check_simulation_meals(table) == TRUE)
-	//		return (NULL);
+		if (check_simulation_time(table) == TRUE
+			|| check_simulation_meals(table) == TRUE)
+			return (NULL);
 		usleep(1500); // tempo de espera para rodar o check, se for mto rapido impacta o philo
 	}
 	return (NULL);
@@ -44,7 +44,7 @@ int	init_simulation(t_config *table)
 	while (i < table->philo_count)
 	{
 		if (pthread_create(&table->philo[i]->thread, NULL,
-				&philosopher, &table->philo[i]) != 0)
+				&philosopher, table->philo[i]) != 0)
 		{
 			printf("Error while initializing the simulation\n");
 			return (FALSE);
@@ -54,7 +54,7 @@ int	init_simulation(t_config *table)
 	if (table->philo_count > 1)
 	{
 		if (pthread_create(&table->check_thread, NULL,
-				&ft_check, &table) != 0)
+				&ft_check, table) != 0)
 		{
 			printf("Error while initializing the simulation\n");
 			return (FALSE);
