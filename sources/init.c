@@ -6,13 +6,13 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/25 14:39:31 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:45:50 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static	t_philo	*init_philosophers(t_config *table);
+static	t_philo	**init_philosophers(t_config *table);
 
 static	pthread_mutex_t	*set_mutex_forks(t_config *table)
 {
@@ -87,22 +87,23 @@ static void	set_forks(t_philo *philo)
 	}
 }
 
-static	t_philo	*init_philosophers(t_config *table)
+static	t_philo	**init_philosophers(t_config *table)
 {
-	t_philo	*philo;
+	t_philo	**philo;
 	int		i;
 
-	philo = malloc(sizeof(t_philo) * table->philo_count);
+	philo = malloc(sizeof(t_philo*));
 	if (philo == 0)
 		return (0);
 	i = 0;
 	while (i < table->philo_count)
 	{
-		philo[i].config = table;
-		philo[i].philo_nb = i;
-		philo[i].eat_count = 0;
-		set_forks(&philo[i]);
-		if (pthread_mutex_init(&philo[i].nb_and_time_meal, NULL) != 0)
+		philo[i] = malloc(sizeof(t_philo) * 1);
+		philo[i]->config = table;
+		philo[i]->philo_nb = i;
+		philo[i]->eat_count = 0;
+		set_forks(philo[i]);
+		if (pthread_mutex_init(&philo[i]->nb_and_time_meal, NULL) != 0)
 			return (FALSE);
 		i++;
 	}

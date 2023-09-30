@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/25 20:17:26 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:42:53 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*philosopher(void *info)
 	philo = (t_philo *)info;
 	while (1)
 	{
+		sleep(1);
 		printf("oi %d", philo->philo_nb);
 	}
 	return (NULL);

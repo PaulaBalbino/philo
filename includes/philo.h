@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/29 10:14:14 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:00:02 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_config
 	pthread_mutex_t	*fork_area;
 	pthread_mutex_t	locked_printf;
 	pthread_mutex_t	stop_simulation_mutex;
-	t_philo			*philo;
+	t_philo			**philo;
 	pthread_t		check_thread; // pthread_t eh o identificador de uma thread, vide linha 41
 	//int				end_simulation;
 	//pthread_mutex_t	*end_simulation_mutex;

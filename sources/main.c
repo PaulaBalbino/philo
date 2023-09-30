@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/29 11:44:17 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 11:58:44 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_mutex_destroy(t_config *table)
 	while (i < table->philo_count)
 	{
 		pthread_mutex_destroy(&table->fork_area[i]);
-		pthread_mutex_destroy(&table->philo[i].nb_and_time_meal);
+		pthread_mutex_destroy(&table->philo[i]->nb_and_time_meal);
 		i++;
 	}
 	pthread_mutex_destroy(&table->locked_printf);
@@ -34,7 +34,7 @@ void wait_threads(t_config *table)
 	i = 0;
 	while(i < table->philo_count)
 	{
-		pthread_join(table->philo[i].thread, NULL);
+		pthread_join(table->philo[i]->thread, NULL);
 		i++;
 	}
 	if (table->philo_count > 1)

@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/29 11:09:04 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:37:03 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	*ft_check(void *input)
 	pthread_mutex_unlock(&table->stop_simulation_mutex);
 	while (TRUE)
 	{
-		if (check_simulation_time(table) == TRUE
-			|| check_simulation_meals(table) == TRUE)
-			return (NULL);
+	//	if (check_simulation_time(table) == TRUE
+	//		|| check_simulation_meals(table) == TRUE)
+	//		return (NULL);
 		usleep(1500); // tempo de espera para rodar o check, se for mto rapido impacta o philo
 	}
 	return (NULL);
@@ -43,7 +43,7 @@ int	init_simulation(t_config *table)
 	i = 0;
 	while (i < table->philo_count)
 	{
-		if (pthread_create(&table->philo[i].thread, NULL,
+		if (pthread_create(&table->philo[i]->thread, NULL,
 				&philosopher, &table->philo[i]) != 0)
 		{
 			printf("Error while initializing the simulation\n");
@@ -74,9 +74,9 @@ int	check_simulation_meals(t_config *table)
 	meals_eaten = 0;
 	while (i < table->philo_count)
 	{
-		pthread_mutex_lock(&table->philo[i].nb_and_time_meal);
-		meals_eaten = meals_eaten + table->philo[i].eat_count;
-		pthread_mutex_unlock(&table->philo[i].nb_and_time_meal);
+		pthread_mutex_lock(&table->philo[i]->nb_and_time_meal);
+		meals_eaten = meals_eaten + table->philo[i]->eat_count;
+		pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal);
 		i++;
 	}
 	if (meals_eaten >= table->philo_count * table->eat_times) // >= eh apenas uma garantia extra caso algum coma a mais
@@ -97,17 +97,17 @@ int	check_simulation_time(t_config *table)
 	i = 0;
 	while (i < table->philo_count)
 	{
-		pthread_mutex_lock(&table->philo[i].nb_and_time_meal);
-		meal_time = table->philo[i].last_eat;
+		pthread_mutex_lock(&table->philo[i]->nb_and_time_meal);
+		meal_time = table->philo[i]->last_eat;
 		if (meal_time >= table->time_to_die + current_time_in_ms())
 		{
 			pthread_mutex_lock(&table->stop_simulation_mutex);
 			table->stop_simulation = TRUE;
 			pthread_mutex_unlock(&table->stop_simulation_mutex);
-			state_message(&table->philo[i], "died");
-			pthread_mutex_unlock(&table->philo[i].nb_and_time_meal); // precisa dar unlock aqui tb para nao dar deadlock, caso contrario retonara true e ficara locked.				return (TRUE);
+			state_message(table->philo[i], "died");
+			pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal); // precisa dar unlock aqui tb para nao dar deadlock, caso contrario retonara true e ficara locked.				return (TRUE);
 		}
-		pthread_mutex_unlock(&table->philo[i].nb_and_time_meal);
+		pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal);
 		i++;
 	}
 	return (FALSE);
