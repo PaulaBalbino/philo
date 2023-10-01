@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 13:39:15 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/09/30 12:46:58 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_philo
 	int				eat_count;
 	int				left_fork;
 	int				right_fork;
-	int				last_eat;
+	time_t				last_eat;
 	t_config		*config;
 	pthread_mutex_t	nb_and_time_meal;
 	//meal time lock ?
