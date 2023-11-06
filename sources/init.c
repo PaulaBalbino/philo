@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 11:45:50 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/05 10:42:54 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,15 @@ int	set_table(t_config *table, int ac, char **av)
 		return (FALSE);
 	}
 	table->fork_area = set_mutex_forks(table);
-	if (set_mutex_forks(table) == 0)
+	if (table->fork_area == 0)
 	{
 		printf("Error while setting the table\n");
 		return (FALSE);
 	}
+	if (pthread_mutex_init(&table->wait_init, NULL) != 0)
+			return (FALSE);
+	//if (pthread_mutex_init(&table->philo_ready_count_mutex, NULL) != 0)
+	//		return (FALSE);
 	return (TRUE);
 }
 
@@ -92,7 +96,7 @@ static	t_philo	**init_philosophers(t_config *table)
 	t_philo	**philo;
 	int		i;
 
-	philo = malloc(sizeof(t_philo*));
+	philo = malloc(sizeof( t_philo *) * table->philo_count);
 	if (philo == 0)
 		return (0);
 	i = 0;

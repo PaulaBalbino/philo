@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/30 12:46:58 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/05 11:41:42 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # define NOT_SET -1
 # define MAXINT 2147483647
 # define MININT -2147483648
+#define SIMULATION_CONTINUE 0
+#define SIMULATION_END 1
 
 # include <pthread.h>
 # include <limits.h>
@@ -43,10 +45,9 @@ typedef struct s_philo
 	int				eat_count;
 	int				left_fork;
 	int				right_fork;
-	time_t				last_eat;
+	time_t			last_eat;
 	t_config		*config;
 	pthread_mutex_t	nb_and_time_meal;
-	//meal time lock ?
 }	t_philo;
 
 typedef struct s_config
@@ -58,9 +59,12 @@ typedef struct s_config
 	int				eat_times;
 	time_t				time_start;
 	int				stop_simulation;
+	int             philo_ready_count;
 	pthread_mutex_t	*fork_area;
 	pthread_mutex_t	locked_printf;
 	pthread_mutex_t	stop_simulation_mutex;
+	pthread_mutex_t	wait_init;
+	//pthread_mutex_t	philo_ready_count_mutex;
 	t_philo			**philo;
 	pthread_t		check_thread; // pthread_t eh o identificador de uma thread, vide linha 41
 	//int				end_simulation;
@@ -71,6 +75,8 @@ typedef struct s_config
 /******************************************************************************
 *                           Function Prototypes                               *
 ******************************************************************************/
+
+void	init_delay(t_config *table);
 
 int		set_table(t_config *table, int ac, char **av);
 int		ft_atoi(char *str);
