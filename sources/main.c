@@ -6,13 +6,13 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/18 16:25:21 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:47:00 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_free_philos(t_config *table)
+static void	ft_free_philos(t_config *table)
 {
 	int	i;
 
@@ -22,6 +22,15 @@ void	ft_free_philos(t_config *table)
 		free(table->philo[i]);
 		i--;
 	}
+}
+
+void	ft_free_resources(t_config *table)
+{
+	if (table->fork_area != NULL)
+		free(table->fork_area);
+	ft_free_philos(table);
+	free(table->philo);
+	free(table);
 }
 
 
@@ -69,24 +78,25 @@ int	main(int ac, char **av)
 {
 	t_config	*table;
 	table = malloc(sizeof(t_config));
+	if (table == NULL)
+		return (0);
 	if (ac < 5 || ac > 6)
 	{
 		printf("Check number of arguments\n");
+		free(table);
 		return (0);
 	}
-	if (numeric_input(ac, av) == -1)
+	if (numeric_input(ac, av, table) == -1)
 		return (0);
+
 	if (set_table(table, ac, av) == FALSE)
-		return (0);
-	if (init_simulation(table) == FALSE)
 	{
-		printf("Error while initializing the simulation\n");
+		ft_free_resources(table);
 		return (0);
 	}
+	if (init_simulation(table) == FALSE)
+		return (0);
 	wait_threads(table);
-	if (table->fork_area != NULL)
-		free(table->fork_area);
-	ft_free_philos(table->philo);
-	free(table->philo);
-	free(table);
+	ft_free_resources(table);
+		return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:58:55 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/18 11:42:22 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:42:26 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	is_valid_numeric_string(char *str)
 	return (0);
 }
 
-int	numeric_input(int ac, char **av)
+int	numeric_input(int ac, char **av, t_config *table)
 {
 	int	i;
 
@@ -48,6 +48,7 @@ int	numeric_input(int ac, char **av)
 		if (is_valid_numeric_string(av[i]) == -1)
 		{
 			printf("At least one argument is invalid!\n");
+			free(table);
 			return (-1);
 		}
 		i++;

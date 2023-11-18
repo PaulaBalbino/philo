@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/06 20:27:25 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:46:29 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	init_simulation(t_config *table)
 				&philosopher, table->philo[i]) != 0)
 		{
 			printf("Error while initializing the simulation\n");
+			ft_free_resources(table);
 			return (FALSE);
 		}
 		i++;

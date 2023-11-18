@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/05 11:41:42 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:47:25 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,8 @@ int		ft_atoi(char *str);
 int		init_simulation(t_config *table);
 void	*philosopher(void *info);
 time_t		current_time_in_ms(void);
-int		numeric_input(int ac, char **av);
+int		numeric_input(int ac, char **av, t_config *table);
 void state_message(t_philo *philo, char *str);
+void	ft_free_resources(t_config *table);
 
 #endif
