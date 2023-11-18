@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/05 10:42:54 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:18:19 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ ZERO SIGNIFICA QUE DEU CERTO */
 
 int	set_table(t_config *table, int ac, char **av)
 {
+	table->philo_ready_count = 0;
 	table->philo_count = ft_atoi(av[1]);
 	table->time_to_die = ft_atoi(av[2]);
 	table->time_to_eat = ft_atoi(av[3]);
@@ -64,10 +65,13 @@ int	set_table(t_config *table, int ac, char **av)
 		printf("Error while setting the table\n");
 		return (FALSE);
 	}
+	table->stop_simulation = FALSE;
 	if (pthread_mutex_init(&table->wait_init, NULL) != 0)
-			return (FALSE);
-	//if (pthread_mutex_init(&table->philo_ready_count_mutex, NULL) != 0)
-	//		return (FALSE);
+		return (FALSE);
+	if (pthread_mutex_init(&table->locked_printf, NULL) != 0)
+		return (FALSE);
+	if (pthread_mutex_init(&table->stop_simulation_mutex, NULL) != 0)
+		return (FALSE);
 	return (TRUE);
 }
 

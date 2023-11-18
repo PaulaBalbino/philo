@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/06 20:45:09 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:13:14 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ int	check_simulation(t_config *table)
 	pthread_mutex_lock(&table->stop_simulation_mutex);
 	aux = table->stop_simulation;
 	pthread_mutex_unlock(&table->stop_simulation_mutex);
-
-	//printf("\nCheck Simu %d", aux);
 	if (aux == TRUE)
 		return (FALSE);
 	else

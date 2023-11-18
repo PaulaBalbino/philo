@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/18 16:47:00 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 13:03:52 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,8 @@ void wait_threads(t_config *table)
 		//printf("\nphilo %d just finished", i + 1);
 		i++;
 	}
-	//printf("\nphilo waiting check thread to finish");
 	if (table->philo_count > 1)
 		pthread_join(table->check_thread, NULL);
-	//printf("\nphilo check thread finished");
 	ft_mutex_destroy(table);
 }
 
