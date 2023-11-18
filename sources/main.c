@@ -6,11 +6,24 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/06 20:27:52 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 16:25:21 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	ft_free_philos(t_config *table)
+{
+	int	i;
+
+	i = table->philo_count - 1;
+	while ( i >= 0)
+	{
+		free(table->philo[i]);
+		i--;
+	}
+}
+
 
 void	ft_mutex_destroy(t_config *table)
 {
@@ -73,6 +86,7 @@ int	main(int ac, char **av)
 	wait_threads(table);
 	if (table->fork_area != NULL)
 		free(table->fork_area);
+	ft_free_philos(table->philo);
 	free(table->philo);
 	free(table);
 }
