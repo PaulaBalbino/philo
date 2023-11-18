@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:58:55 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/09/25 14:06:03 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/18 11:42:22 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	is_valid_numeric_string(char *str)
 		else
 			return (-1);
 	}
-	if (signal == 1 && i <= 1)
+	if (signal == 1)
 		return (-1);
 	return (0);
 }
