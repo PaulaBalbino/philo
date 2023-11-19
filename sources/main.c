@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/18 13:03:52 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:53:01 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	ft_free_philos(t_config *table)
 	int	i;
 
 	i = table->philo_count - 1;
-	while ( i >= 0)
+	while (i >= 0)
 	{
 		free(table->philo[i]);
 		i--;
@@ -32,7 +32,6 @@ void	ft_free_resources(t_config *table)
 	free(table->philo);
 	free(table);
 }
-
 
 void	ft_mutex_destroy(t_config *table)
 {
@@ -49,16 +48,14 @@ void	ft_mutex_destroy(t_config *table)
 	pthread_mutex_destroy(&table->stop_simulation_mutex);
 }
 
-void wait_threads(t_config *table)
+void	wait_threads(t_config *table)
 {
 	int	i;
 
 	i = 0;
-	while(i < table->philo_count)
+	while (i < table->philo_count)
 	{
-		//printf("\nphilo %d waiting it to finish or die", i + 1);
 		pthread_join(table->philo[i]->thread, NULL);
-		//printf("\nphilo %d just finished", i + 1);
 		i++;
 	}
 	if (table->philo_count > 1)
@@ -75,6 +72,7 @@ void wait_threads(t_config *table)
 int	main(int ac, char **av)
 {
 	t_config	*table;
+
 	table = malloc(sizeof(t_config));
 	if (table == NULL)
 		return (0);
@@ -86,8 +84,7 @@ int	main(int ac, char **av)
 	}
 	if (numeric_input(ac, av, table) == -1)
 		return (0);
-
-	if (set_table(table, ac, av) == FALSE)
+	if (set_table(table, ac, av) == FALSE || (table->eat_times == 0))
 	{
 		ft_free_resources(table);
 		return (0);
@@ -96,5 +93,5 @@ int	main(int ac, char **av)
 		return (0);
 	wait_threads(table);
 	ft_free_resources(table);
-		return (0);
+	return (0);
 }

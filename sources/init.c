@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/18 13:18:19 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/19 18:38:00 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,22 @@ static	pthread_mutex_t	*set_mutex_forks(t_config *table)
 
 /*
 pthread_mutex_init:
-If successful, pthread_mutex_init() will return zero and put the new mutex id into mutex,
-otherwise an error number will be returned to indicate the error.
+If successful, pthread_mutex_init() will return zero and put the
+new mutex id into mutex, otherwise an error number will be returned
+to indicate the error.
 
 ZERO SIGNIFICA QUE DEU CERTO */
+
+int	init_table_mutexes(t_config *table)
+{
+	if (pthread_mutex_init(&table->wait_init, NULL) != 0)
+		return (FALSE);
+	if (pthread_mutex_init(&table->locked_printf, NULL) != 0)
+		return (FALSE);
+	if (pthread_mutex_init(&table->stop_simulation_mutex, NULL) != 0)
+		return (FALSE);
+	return (TRUE);
+}
 
 int	set_table(t_config *table, int ac, char **av)
 {
@@ -66,11 +78,7 @@ int	set_table(t_config *table, int ac, char **av)
 		return (FALSE);
 	}
 	table->stop_simulation = FALSE;
-	if (pthread_mutex_init(&table->wait_init, NULL) != 0)
-		return (FALSE);
-	if (pthread_mutex_init(&table->locked_printf, NULL) != 0)
-		return (FALSE);
-	if (pthread_mutex_init(&table->stop_simulation_mutex, NULL) != 0)
+	if (init_table_mutexes(table) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
@@ -100,7 +108,7 @@ static	t_philo	**init_philosophers(t_config *table)
 	t_philo	**philo;
 	int		i;
 
-	philo = malloc(sizeof( t_philo *) * table->philo_count);
+	philo = malloc(sizeof(t_philo *) * table->philo_count);
 	if (philo == 0)
 		return (0);
 	i = 0;

@@ -6,13 +6,13 @@
 #    By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:07:23 by pbalbino          #+#    #+#              #
-#    Updated: 2023/09/30 13:09:25 by pbalbino         ###   ########.fr        #
+#    Updated: 2023/11/19 16:54:21 by pbalbino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-CFLAGS	=	 -pthread -Wall -Werror -Wextra -g
+CFLAGS	=	-pthread -Wall -Werror -Wextra
 # -Wall -Werror -Wextra
 #RM		=	/bin/rm -f
 
@@ -20,6 +20,7 @@ SRC_PATH = 	sources/
 OBJ_PATH = objects/
 
 SRC	=		actions.c \
+			actions2.c \
 			init.c \
 			input_validation.c \
 			main.c \
