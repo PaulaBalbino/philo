@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 18:33:52 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/19 19:19:20 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ int	check_simulation_meals(t_config *table)
 	if (meals_eaten >= table->philo_count * table->eat_times)
 	// >= eh apenas uma garantia extra caso algum coma a mais
 	{
-		printf("\n check_simulation_meals fim  philo_count %d eat_times %d",
-			table->philo_count, table->eat_times);
 		pthread_mutex_lock(&table->stop_simulation_mutex);
 		table->stop_simulation = TRUE;
 		pthread_mutex_unlock(&table->stop_simulation_mutex);
@@ -95,6 +93,9 @@ int	check_simulation_meals(t_config *table)
 	}
 	return (FALSE);
 }
+
+/* printf("\n check_simulation_meals fim  philo_count %d eat_times %d",
+table->philo_count, table->eat_times); */
 
 int	check_simulation_time(t_config *table)
 {
