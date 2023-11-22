@@ -6,15 +6,13 @@
 #    By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/25 14:07:23 by pbalbino          #+#    #+#              #
-#    Updated: 2023/11/19 16:54:21 by pbalbino         ###   ########.fr        #
+#    Updated: 2023/11/22 16:43:13 by pbalbino         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	philo
 CC		=	cc
-CFLAGS	=	-pthread -Wall -Werror -Wextra
-# -Wall -Werror -Wextra
-#RM		=	/bin/rm -f
+CFLAGS	=	-pthread -Wall -Werror -Wextra -g3
 
 SRC_PATH = 	sources/
 OBJ_PATH = objects/

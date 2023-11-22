@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 18:53:01 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:39:47 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_mutex_destroy(t_config *table)
 	}
 	pthread_mutex_destroy(&table->locked_printf);
 	pthread_mutex_destroy(&table->stop_simulation_mutex);
+	pthread_mutex_destroy(&table->philo_ready_count_mutex);
 }
 
 void	wait_threads(t_config *table)
