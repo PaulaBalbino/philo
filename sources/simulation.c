@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/23 13:59:00 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:56:39 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*ft_check(void *input)
 int	init_simulation(t_config *table)
 {
 	int	i;
+	int currentCount = 0;
 
 	i = 0;
 	pthread_mutex_lock(&table->wait_init);
@@ -57,8 +58,18 @@ int	init_simulation(t_config *table)
 	}
 	table->time_start = current_time_in_ms();
 	pthread_mutex_unlock(&table->wait_init);
-	while (table->philo_ready_count != table->philo_count)
-		usleep(100);
+
+	pthread_mutex_lock(&table->philo_ready_count_mutex);
+	currentCount = table->philo_count;
+	pthread_mutex_unlock(&table->philo_ready_count_mutex);
+
+	while (currentCount != table->philo_count){
+		pthread_mutex_lock(&table->philo_ready_count_mutex);
+		currentCount = table->philo_ready_count;
+		pthread_mutex_unlock(&table->philo_ready_count_mutex);
+		usleep(1000);
+	}
+	sleep(1);
 	if (table->philo_count > 1) // criacao do checker
 		if (pthread_create(&table->check_thread, NULL, &ft_check, table) != 0)
 			return (FALSE);
