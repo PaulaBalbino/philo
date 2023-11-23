@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/23 16:56:39 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:19:55 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	init_simulation(t_config *table)
 		pthread_mutex_unlock(&table->philo_ready_count_mutex);
 		usleep(1000);
 	}
-	sleep(1);
+	sleep(1); //TODO NAO PODE DEIXAR ASSIM REVER
 	if (table->philo_count > 1) // criacao do checker
 		if (pthread_create(&table->check_thread, NULL, &ft_check, table) != 0)
 			return (FALSE);
