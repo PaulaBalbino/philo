@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:50:03 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/22 16:40:57 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:58:35 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,19 @@ void	*philosopher(void *info)
 		ft_think(philo);
 	while (check_simulation(philo->config) == TRUE)
 	{
+		if (ft_eat(philo) == SIMULATION_END
+			|| ft_sleep(philo) == SIMULATION_END)
+			break ;
+		if (ft_think(philo) == SIMULATION_END)
+			break ;
+	}
+	return (0);
+}
+
+/*
+
+	while (check_simulation(philo->config) == TRUE)
+	{
 		if (ft_eat(philo) == SIMULATION_END)
 			break ;
 		if (ft_sleep(philo) == SIMULATION_END)
@@ -68,5 +81,4 @@ void	*philosopher(void *info)
 		if (ft_think(philo) == SIMULATION_END)
 			break ;
 	}
-	return (0);
-}
+*/

@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 19:19:20 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:59:00 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	init_simulation(t_config *table)
 			ft_free_resources(table);
 			return (FALSE);
 		}
-	i++;
+		i++;
 		usleep(1000);
 	}
 	table->time_start = current_time_in_ms();

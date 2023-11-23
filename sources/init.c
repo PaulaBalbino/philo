@@ -6,17 +6,18 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/22 17:22:44 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/23 13:52:20 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static	void init_philosophers(t_config *table);
+static	void	init_philosophers(t_config *table);
 
-static	void set_mutex_forks(t_config *table)
+static	void	set_mutex_forks(t_config *table)
 {
-	int				i;
+	int	i;
+
 	table->fork_area = malloc(sizeof(pthread_mutex_t) * table->philo_count);
 	if (table->fork_area == 0)
 		return ;
@@ -28,7 +29,7 @@ static	void set_mutex_forks(t_config *table)
 			free (table->fork_area);
 			return ;
 		}
-	i++;
+		i++;
 	}
 }
 
@@ -102,7 +103,7 @@ static void	set_forks(t_philo *philo)
 	}
 }
 
-static	void init_philosophers(t_config *table)
+static	void	init_philosophers(t_config *table)
 {
 	int		i;
 
