@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:50:03 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 18:44:22 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:15:35 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ void	*philosopher(void *info)
 	pthread_mutex_lock(&philo->nb_and_time_meal);
 	philo->last_eat = philo->config->time_start;
 	pthread_mutex_unlock(&philo->nb_and_time_meal);
+	pthread_mutex_lock(&philo->config->philo_ready_count_mutex);
 	philo->config->philo_ready_count++;
+	pthread_mutex_unlock(&philo->config->philo_ready_count_mutex);
 	if (philo->config->time_to_die == 0)
 		return (0);
 	if (philo->config->philo_count == 1)
@@ -59,9 +61,8 @@ void	*philosopher(void *info)
 		ft_think(philo);
 	while (check_simulation(philo->config) == TRUE)
 	{
-		if (ft_eat(philo) == SIMULATION_END)
-			break ;
-		if (ft_sleep(philo) == SIMULATION_END)
+		if (ft_eat(philo) == SIMULATION_END
+			|| ft_sleep(philo) == SIMULATION_END)
 			break ;
 		if (ft_think(philo) == SIMULATION_END)
 			break ;

@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 19:19:20 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:51:12 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	*ft_check(void *input)
 int	init_simulation(t_config *table)
 {
 	int	i;
+	int	currentcount;
 
 	i = 0;
+	currentcount = 0;
 	pthread_mutex_lock(&table->wait_init);
 	while (i < table->philo_count)
 	{
@@ -52,19 +54,29 @@ int	init_simulation(t_config *table)
 			ft_free_resources(table);
 			return (FALSE);
 		}
-	i++;
+		i++;
 		usleep(1000);
 	}
 	table->time_start = current_time_in_ms();
 	pthread_mutex_unlock(&table->wait_init);
-	while (table->philo_ready_count != table->philo_count)
-		usleep(100);
-	if (table->philo_count > 1) // criacao do checker
+	pthread_mutex_lock(&table->philo_ready_count_mutex);
+	currentcount = table->philo_count;
+	pthread_mutex_unlock(&table->philo_ready_count_mutex);
+	while (currentcount != table->philo_count)
+	{
+		pthread_mutex_lock(&table->philo_ready_count_mutex);
+		currentcount = table->philo_ready_count;
+		pthread_mutex_unlock(&table->philo_ready_count_mutex);
+		usleep(1000);
+	}
+	usleep (table->philo_count * 100);
+	if (table->philo_count > 1)
 		if (pthread_create(&table->check_thread, NULL, &ft_check, table) != 0)
 			return (FALSE);
 	return (TRUE);
 }
 
+//LINE 73: Criacao do checker.
 /* verificar se o nr de refeicoes foi atingido ou se morreu*/
 
 int	check_simulation_meals(t_config *table)

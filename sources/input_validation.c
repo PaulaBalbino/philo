@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:58:55 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 18:46:33 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:27:17 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_valid_numeric_string(char *str)
 	nb_pos = i;
 	while (str[i] != 0)
 	{
-		if (str[i] == '+' && i != nb_pos)
+		if ((str[i] == '+' || str[i] == '-') && i != nb_pos)
 			return (-1);
 		if (str[i] == '+')
 			i++;
@@ -54,11 +54,6 @@ int	numeric_input(int ac, char **av, t_config *table)
 			return (-1);
 		}
 		i++;
-		//if (i == 6)
-		//{
-		//	if (av[6] == 0)
-		//		return (-1);
-		//}
 	}
 	return (0);
 }

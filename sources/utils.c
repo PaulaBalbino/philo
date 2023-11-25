@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:26:38 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 11:22:18 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:38:43 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,8 @@ _STRUCT_TIMEVAL
 void	state_message(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->config->locked_printf);
-//TODO current time: mudar para long
 	printf("%ld %d %s\n", current_time_in_ms()
 		- philo->config->time_start, philo->philo_nb + 1, str);
-//TODO current time: mudar para long
 	pthread_mutex_unlock(&philo->config->locked_printf);
 }
 
