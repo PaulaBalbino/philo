@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/19 18:44:16 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/25 06:45:26 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	ft_start_eating(t_philo *philo)
 	if (check_simulation(philo->config) == FALSE)
 	{
 		pthread_mutex_unlock(&philo->config->fork_area[philo->right_fork]);
+		pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 		return (SIMULATION_END);
 	}
 	state_message(philo, "has taken a fork");
