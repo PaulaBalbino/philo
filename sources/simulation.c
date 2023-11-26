@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 10:34:59 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:45:16 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int	init_simulation(t_config *table)
 	currentcount = 0;
 	if (ft_start_philo(table) == FALSE)
 		return (FALSE);
-	pthread_mutex_lock(&table->philo_ready_count_mutex);
-	currentcount = table->philo_count;
-	pthread_mutex_unlock(&table->philo_ready_count_mutex);
 	while (currentcount != table->philo_count)
 	{
 		pthread_mutex_lock(&table->philo_ready_count_mutex);

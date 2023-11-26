@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 10:28:13 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 11:03:00 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,11 @@ ZERO SIGNIFICA QUE DEU CERTO
 
 line 84: fork do primeiro philo (philo zero);
 
- fork do primeiro philo (philo zero);
+line 78: static void set_forks(t_philo *philo)
+Dar os garfos para os filosofos pares e impares de forma alternada
+previne deadlock;
 
+103: if (pthread_mutex_init(&table->philo[i]->nb_and_time_meal, NULL) != 0)
+inicializacao do mutex que vai ser usado para contar o numero de refeicoes e
+o horario da ultima refeicao do philo;
 */
