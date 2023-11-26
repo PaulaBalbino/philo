@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/25 06:45:26 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:29:49 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	ft_start_eating(t_philo *philo)
 		pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 		return (SIMULATION_END);
 	}
+	philo->config->forks[philo->left_fork] = UP;
 	state_message(philo, "has taken a fork");
 	pthread_mutex_lock(&philo->config->fork_area[philo->right_fork]);
 	if (check_simulation(philo->config) == FALSE)
@@ -62,6 +63,7 @@ int	ft_start_eating(t_philo *philo)
 		pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 		return (SIMULATION_END);
 	}
+	philo->config->forks[philo->right_fork] = UP;
 	state_message(philo, "has taken a fork");
 	state_message(philo, "is eating");
 	return (SIMULATION_CONTINUE);
@@ -77,6 +79,8 @@ int	ft_eat(t_philo *philo)
 	if (philo_sleep(philo->config, philo->config->time_to_eat)
 		!= SIMULATION_CONTINUE)
 	{
+		philo->config->forks[philo->left_fork] = DOWN;
+		philo->config->forks[philo->right_fork] = DOWN;
 		pthread_mutex_unlock(&philo->config->fork_area[philo->right_fork]);
 		pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 		return (SIMULATION_END);
@@ -87,6 +91,8 @@ int	ft_eat(t_philo *philo)
 		philo->eat_count = philo->eat_count + 1;
 		pthread_mutex_unlock(&philo->nb_and_time_meal);
 	}
+	philo->config->forks[philo->left_fork] = DOWN;
+	philo->config->forks[philo->right_fork] = DOWN;
 	pthread_mutex_unlock(&philo->config->fork_area[philo->right_fork]);
 	pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 	return (SIMULATION_CONTINUE);

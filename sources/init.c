@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 11:03:00 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:24:01 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ static	void	set_mutex_forks(t_config *table)
 	table->fork_area = malloc(sizeof(pthread_mutex_t) * table->philo_count);
 	if (table->fork_area == 0)
 		return ;
+	table->forks = malloc(sizeof(int) * table->philo_count);
+	if (table->forks == 0)
+		return ;
 	i = 0;
 	while (i < table->philo_count)
 	{
@@ -29,6 +32,7 @@ static	void	set_mutex_forks(t_config *table)
 			free (table->fork_area);
 			return ;
 		}
+		table->forks[i] = DOWN;
 		i++;
 	}
 }

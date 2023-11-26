@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 10:37:11 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:24:28 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # define TRUE 1
 # define FALSE 0
 # define NOT_SET -1
+# define UP 1
+# define DOWN 0
 # define MAXINT 2147483647
 # define MININT -2147483648
 # define SIMULATION_CONTINUE 0
@@ -60,6 +62,7 @@ typedef struct s_config
 	time_t			time_start;
 	int				stop_simulation;
 	int				philo_ready_count;
+	int				*forks;
 	pthread_mutex_t	*fork_area;
 	pthread_mutex_t	locked_printf;
 	pthread_mutex_t	stop_simulation_mutex;
