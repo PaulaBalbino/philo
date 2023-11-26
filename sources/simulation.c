@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 10:52:47 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/25 15:51:12 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 10:34:59 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,15 @@ void	*ft_check(void *input)
 			|| check_simulation_meals(table) == TRUE)
 			return (NULL);
 		usleep(1500);
-	// tempo de espera para rodar o check, se for mto rapido impacta o philo
 	}
 	return (NULL);
 }
 
-int	init_simulation(t_config *table)
+int	ft_start_philo(t_config *table)
 {
 	int	i;
-	int	currentcount;
 
 	i = 0;
-	currentcount = 0;
 	pthread_mutex_lock(&table->wait_init);
 	while (i < table->philo_count)
 	{
@@ -59,6 +56,16 @@ int	init_simulation(t_config *table)
 	}
 	table->time_start = current_time_in_ms();
 	pthread_mutex_unlock(&table->wait_init);
+	return (TRUE);
+}
+
+int	init_simulation(t_config *table)
+{
+	int	currentcount;
+
+	currentcount = 0;
+	if (ft_start_philo(table) == FALSE)
+		return (FALSE);
 	pthread_mutex_lock(&table->philo_ready_count_mutex);
 	currentcount = table->philo_count;
 	pthread_mutex_unlock(&table->philo_ready_count_mutex);
@@ -75,9 +82,6 @@ int	init_simulation(t_config *table)
 			return (FALSE);
 	return (TRUE);
 }
-
-//LINE 73: Criacao do checker.
-/* verificar se o nr de refeicoes foi atingido ou se morreu*/
 
 int	check_simulation_meals(t_config *table)
 {
@@ -96,7 +100,6 @@ int	check_simulation_meals(t_config *table)
 		i++;
 	}
 	if (meals_eaten >= table->philo_count * table->eat_times)
-	// >= eh apenas uma garantia extra caso algum coma a mais
 	{
 		pthread_mutex_lock(&table->stop_simulation_mutex);
 		table->stop_simulation = TRUE;
@@ -105,9 +108,6 @@ int	check_simulation_meals(t_config *table)
 	}
 	return (FALSE);
 }
-
-/* printf("\n check_simulation_meals fim  philo_count %d eat_times %d",
-table->philo_count, table->eat_times); */
 
 int	check_simulation_time(t_config *table)
 {
@@ -126,8 +126,6 @@ int	check_simulation_time(t_config *table)
 			table->stop_simulation = TRUE;
 			pthread_mutex_unlock(&table->stop_simulation_mutex);
 			pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal);
-			// precisa dar unlock aqui tb para nao dar deadlock,
-			//caso contrario retonara true e ficara locked.
 			return (TRUE);
 		}
 		pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal);
@@ -135,3 +133,24 @@ int	check_simulation_time(t_config *table)
 	}
 	return (FALSE);
 }
+
+/*
+line 34: tempo de espera para rodar o check, se for mto rapido impacta o philo
+
+line 81: Criacao do checker.
+
+line 86 ft_check_simulations meals: verificar se o nr de refeicoes foi atingido
+ou se morreu
+
+line 102: if (meals_eaten >= table->philo_count * table->eat_times)
+	 >= eh apenas uma garantia extra caso algum coma a mais
+
+line 127 / 128:
+			pthread_mutex_unlock(&table->stop_simulation_mutex);
+			pthread_mutex_unlock(&table->philo[i]->nb_and_time_meal);
+			>> precisa dar unlock aqui tb para nao dar deadlock,
+			caso contrario retonara true e ficara locked.
+
+
+
+*/

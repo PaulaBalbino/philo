@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 17:38:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/23 13:52:20 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 10:28:13 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,6 @@ static	void	set_mutex_forks(t_config *table)
 		i++;
 	}
 }
-
-/*
-pthread_mutex_init:
-If successful, pthread_mutex_init() will return zero and put the
-new mutex id into mutex, otherwise an error number will be returned
-to indicate the error.
-
-ZERO SIGNIFICA QUE DEU CERTO */
 
 int	init_table_mutexes(t_config *table)
 {
@@ -89,7 +81,7 @@ static void	set_forks(t_philo *philo)
 	{
 		philo->left_fork = philo->philo_nb;
 		if (philo->philo_nb == philo->config->philo_count - 1)
-			philo->right_fork = 0; // fork do primeiro philo (philo zero);
+			philo->right_fork = 0;
 		else
 			philo->right_fork = philo->philo_nb + 1;
 	}
@@ -97,7 +89,7 @@ static void	set_forks(t_philo *philo)
 	{
 		philo->right_fork = philo->philo_nb;
 		if (philo->philo_nb == philo->config->philo_count - 1)
-			philo->left_fork = 0; // fork do primeiro philo (philo zero);
+			philo->left_fork = 0;
 		else
 			philo->left_fork = philo->philo_nb + 1;
 	}
@@ -123,3 +115,17 @@ static	void	init_philosophers(t_config *table)
 		i++;
 	}
 }
+
+/*
+pthread_mutex_init:
+If successful, pthread_mutex_init() will return zero and put the
+new mutex id into mutex, otherwise an error number will be returned
+to indicate the error.
+
+ZERO SIGNIFICA QUE DEU CERTO
+
+line 84: fork do primeiro philo (philo zero);
+
+ fork do primeiro philo (philo zero);
+
+*/

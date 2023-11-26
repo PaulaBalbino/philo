@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/25 15:52:19 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 10:37:11 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_config
 	pthread_t		check_thread;
 }	t_config;
 
-// pthread_t eh o identificador de uma thread
 /* Function Prototypes */
 
 void	init_delay(t_config *table);

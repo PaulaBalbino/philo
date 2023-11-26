@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/22 16:39:47 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 10:40:14 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,6 @@ void	wait_threads(t_config *table)
 	ft_mutex_destroy(table);
 }
 
-/*
- The pthread_join() function suspends execution of the calling thread
-     until the target thread terminates unless the target thread has already
-     terminated.
-	 */
-
 int	main(int ac, char **av)
 {
 	t_config	*table;
@@ -96,3 +90,9 @@ int	main(int ac, char **av)
 	ft_free_resources(table);
 	return (0);
 }
+
+/*
+ The pthread_join() function suspends execution of the calling thread
+     until the target thread terminates unless the target thread has already
+     terminated.
+	 */

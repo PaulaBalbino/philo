@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:50:03 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/25 15:15:35 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 10:36:40 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*ft_one_philo(t_philo *philo)
 	return (0);
 }
 
-void	init_delay(t_config *table) // TODO rever depois
+void	init_delay(t_config *table)
 {
 	pthread_mutex_lock(&table->wait_init);
 	pthread_mutex_unlock(&table->wait_init);
@@ -46,7 +46,7 @@ void	*philosopher(void *info)
 	t_philo	*philo;
 
 	philo = (t_philo *)info;
-	init_delay(philo->config); //Block until all philospher are ready
+	init_delay(philo->config);
 	pthread_mutex_lock(&philo->nb_and_time_meal);
 	philo->last_eat = philo->config->time_start;
 	pthread_mutex_unlock(&philo->nb_and_time_meal);
@@ -57,7 +57,7 @@ void	*philosopher(void *info)
 		return (0);
 	if (philo->config->philo_count == 1)
 		return (ft_one_philo(philo));
-	else if (philo->philo_nb % 2 == 0) // philos pares
+	else if (philo->philo_nb % 2 == 0)
 		ft_think(philo);
 	while (check_simulation(philo->config) == TRUE)
 	{
@@ -69,3 +69,12 @@ void	*philosopher(void *info)
 	}
 	return (0);
 }
+
+/*
+line 49: init_delay(philo->config); //Block until all philospher are ready;
+
+line 60: else if (philo->philo_nb % 2 == 0) // philos pares pensam primeiro;
+
+
+
+*/
