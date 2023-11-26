@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:59:13 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 17:24:28 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:31:17 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ time_t	current_time_in_ms(void);
 int		numeric_input(int ac, char **av, t_config *table);
 void	state_message(t_philo *philo, char *str);
 void	ft_free_resources(t_config *table);
-int		philo_sleep(t_config *table, time_t sleep_time);
+int		philo_delay(t_config *table, time_t sleep_time);
 int		ft_sleep(t_philo *philo);
 int		ft_think(t_philo *philo);
 int		ft_eat(t_philo *philo);

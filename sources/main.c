@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:57:16 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 17:26:18 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 18:18:53 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,4 @@ int	main(int ac, char **av)
  The pthread_join() function suspends execution of the calling thread
      until the target thread terminates unless the target thread has already
      terminated.
-	 */
+*/

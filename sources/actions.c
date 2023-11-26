@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 11:06:39 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 17:29:49 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:08:35 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_simulation(t_config *table);
 
-int	philo_sleep(t_config *table, time_t sleep_time)
+int	philo_delay(t_config *table, time_t sleep_time)
 {
 	time_t	wake_up;
 
@@ -31,7 +31,7 @@ int	philo_sleep(t_config *table, time_t sleep_time)
 int	ft_sleep(t_philo *philo)
 {
 	state_message(philo, "is sleeping");
-	return (philo_sleep(philo->config, philo->config->time_to_sleep));
+	return (philo_delay(philo->config, philo->config->time_to_sleep));
 }
 
 int	ft_think(t_philo *philo)
@@ -43,7 +43,7 @@ int	ft_think(t_philo *philo)
 				-philo->last_eat) - philo->config->time_to_eat) / 2;
 	pthread_mutex_unlock(&philo->nb_and_time_meal);
 	state_message(philo, "is thinking");
-	return (philo_sleep(philo->config, think));
+	return (philo_delay(philo->config, think));
 }
 
 int	ft_start_eating(t_philo *philo)
@@ -59,6 +59,7 @@ int	ft_start_eating(t_philo *philo)
 	pthread_mutex_lock(&philo->config->fork_area[philo->right_fork]);
 	if (check_simulation(philo->config) == FALSE)
 	{
+		philo->config->forks[philo->left_fork] = DOWN;
 		pthread_mutex_unlock(&philo->config->fork_area[philo->right_fork]);
 		pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 		return (SIMULATION_END);
@@ -76,7 +77,7 @@ int	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->nb_and_time_meal);
 	philo->last_eat = current_time_in_ms();
 	pthread_mutex_unlock(&philo->nb_and_time_meal);
-	if (philo_sleep(philo->config, philo->config->time_to_eat)
+	if (philo_delay(philo->config, philo->config->time_to_eat)
 		!= SIMULATION_CONTINUE)
 	{
 		philo->config->forks[philo->left_fork] = DOWN;
@@ -97,16 +98,3 @@ int	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 	return (SIMULATION_CONTINUE);
 }
-
-/* eh possivel criar o if dentro do mutex, porem nao eh o recomendado.
- qto menos tempo ficar travado o mutex melhor. */
-
-/*
-prototipo do pthread create:
-int
-pthread_create(pthread_t *thread, const pthread_attr_t *attr,
-		void *(*start_routine)(void *), void *arg);
-
-por isso que eh void * e recebe (void *)
-
-*/

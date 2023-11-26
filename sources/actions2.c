@@ -6,7 +6,7 @@
 /*   By: pbalbino <pbalbino@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 10:50:03 by pbalbino          #+#    #+#             */
-/*   Updated: 2023/11/26 10:36:40 by pbalbino         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:16:41 by pbalbino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	*ft_one_philo(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->config->fork_area[philo->left_fork]);
 	state_message(philo, "has taken a fork");
-	philo_sleep(philo->config, philo->config->time_to_die);
+	philo->config->forks[philo->left_fork] = UP;
+	philo_delay(philo->config, philo->config->time_to_die);
+	philo->config->forks[philo->left_fork] = DOWN;
 	pthread_mutex_unlock(&philo->config->fork_area[philo->left_fork]);
 	state_message(philo, "died");
 	return (0);
@@ -74,7 +76,5 @@ void	*philosopher(void *info)
 line 49: init_delay(philo->config); //Block until all philospher are ready;
 
 line 60: else if (philo->philo_nb % 2 == 0) // philos pares pensam primeiro;
-
-
 
 */
